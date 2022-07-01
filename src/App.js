@@ -1,10 +1,6 @@
 import React, { useEffect, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { fetchTodos } from "./redux/addtodo_reducer";
-// import AddTodoForm from './components/AddTodoForm';
-// import TodoList from './components/TodoList';
-// import TotalCompleteItems from './components/TotalCompleteItems';
-
 const AddTodoForm = React.lazy(() => import("./components/AddTodoForm"));
 const TodoList = React.lazy(() => import("./components/TodoList"));
 const TotalCompleteItems = React.lazy(() =>import("./components/TotalCompleteItems"));
