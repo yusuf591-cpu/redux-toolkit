@@ -22,54 +22,54 @@ export const fetchTodos = createAsyncThunk(
 )
 
 export const deleteTodos = createAsyncThunk(
- 'todos/deleteTodos',
-   async (id, { rejectWithValue ,dispatch })=>  {
-          try {
-            const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-              method: 'DELETE',
-            });
-      
-            if (!res.ok) {
-              throw new Error('Something went wrong');
-            }
-            console.log(res);
-            dispatch(removeTodo({id}));
-            
-          } catch (error) {
-            return rejectWithValue(error.message);
-            
-          }
-   }
+  'todos/deleteTodos',
+  async (id, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!res.ok) {
+        throw new Error('Something went wrong');
+      }
+      console.log(res);
+      dispatch(removeTodo({ id }));
+
+    } catch (error) {
+      return rejectWithValue(error.message);
+
+    }
+  }
 )
 
 export const toggleStatus = createAsyncThunk(
   'todos/toggleStatus',
-  
-  async (id, { rejectWithValue ,dispatch, getState })=>  {
-     
+
+  async (id, { rejectWithValue, dispatch, getState }) => {
+
     const todo = getState().todos.todos.find(todo => todo.id === id);
 
-       try {
-          const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 
-              completed: !todo.completed
-            })
-          });
-          console.log(res);
-          if (!res.ok) {
-            throw new Error('Something went wrong');
-          }
-          dispatch(toggleComplete({id}));
-          
-       } 
-       catch (error) {
-          return rejectWithValue(error.message);
-          
-       }
+    try {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          completed: !todo.completed
+        })
+      });
+      console.log(res);
+      if (!res.ok) {
+        throw new Error('Something went wrong');
+      }
+      dispatch(toggleComplete({ id }));
+
+    }
+    catch (error) {
+      return rejectWithValue(error.message);
+
+    }
   }
 )
 
@@ -110,7 +110,7 @@ const setError = (state, action) => {
 
 export const todoSlice = createSlice({
   name: 'todo',
-  initialState:{
+  initialState: {
     todos: [],
     status: null,
     error: null,
@@ -142,12 +142,12 @@ export const todoSlice = createSlice({
       state.todos = action.payload;
     },
     [fetchTodos.rejected]: setError,
-    [deleteTodos.rejected]:setError,
-    [addingTodo.rejected]:setError,
+    [deleteTodos.rejected]: setError,
+    [addingTodo.rejected]: setError,
   }
 })
 
-export const {removeTodo, toggleComplete,createTodo } = todoSlice.actions
+export const { removeTodo, toggleComplete, createTodo } = todoSlice.actions
 
 
 export default todoSlice.reducer

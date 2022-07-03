@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { fetchTodos } from "./redux/addtodo_reducer";
 const AddTodoForm = React.lazy(() => import("./components/AddTodoForm"));
 const TodoList = React.lazy(() => import("./components/TodoList"));
-const TotalCompleteItems = React.lazy(() =>import("./components/TotalCompleteItems"));
+const TotalCompleteItems = React.lazy(() => import("./components/TotalCompleteItems"));
 
 const App = () => {
   const dispatch = useDispatch();
